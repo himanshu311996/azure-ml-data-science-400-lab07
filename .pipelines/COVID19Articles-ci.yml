@@ -87,6 +87,10 @@ stages:
         ExperimentName: '$(EXPERIMENT_NAME)'
         PipelineParameters: '"ParameterAssignments": {"model_name": "$(MODEL_NAME)"}, "tags": {"BuildId": "$(Build.BuildId)", "BuildUri": "$(BUILD_URI)"}, "StepTags": {"BuildId": "$(Build.BuildId)", "BuildUri": "$(BUILD_URI)"}'
   - job: "Training_Run_Report"
+- task: ManualIntervention@8
+  inputs:
+    instructions: 'Please approve the registered model. This will allow the deployment to continue.'
+    emailRecipients: 'himanshuahlawat695@gmail.com'
     dependsOn: "Run_ML_Pipeline"
     condition: always()
     displayName: "Publish artifact if new model was registered"
